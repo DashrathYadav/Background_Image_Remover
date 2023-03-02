@@ -10,4 +10,3 @@ scipy
 torch
 torchvision
 tqdm
-json
