@@ -42,26 +42,29 @@ def upload():
     # adrr='http://127.0.0.1:5000/'
     adrr= 'https://back-ground-image-remove.onrender.com/'
     url=adrr+'serv'
-    r=requests.post(url,imagestring)
+    r=requests.post('https://back-ground-image-remove.onrender.com/serv',imagestring)
     print(r.json())
     time.sleep(5)
     return render_template('user_image_show.html')
 
 @app.route('/serv',methods=['POST'])
 def  serv():
+        
         client_data=request.data
-        # print("client data is ",client_data)
+        print("client data is ")
 
         with open("server_pic.jpg",'wb+') as serv_img:
              serv_img.write(base64.b64decode(client_data))
              print("writting is done")
         
-        if not os.path.exists('MODNet'):
-            subprocess.run(["git", "clone", "https://github.com/ZHKKKe/MODNet"])
+        # if not os.path.exists('MODNet'):
+        #     subprocess.run(["git", "clone", "https://github.com/ZHKKKe/MODNet"])
 
-        pretrained_ckpt = 'pretrained/modnet_photographic_portrait_matting.ckpt'
+        print("Modnet is made")
 
-        if os.path.exists('MODNet.demo/image_matting/colab/input'):
+        # pretrained_ckpt = 'pretrained/modnet_photographic_portrait_matting.ckpt'
+
+        # if os.path.exists('MODNet.demo/image_matting/colab/input'):
         #     print("You have this path")
         
         input_folder = 'MODNet/demo/image_matting/colab/input'
@@ -69,7 +72,7 @@ def  serv():
             shutil.rmtree(input_folder)
         os.makedirs(input_folder)
         print(os.getcwd())
-
+        
         output_folder = 'MODNet/demo/image_matting/colab/output'
         if os.path.exists(output_folder):
          shutil.rmtree(output_folder)
