@@ -150,5 +150,6 @@ def  serv():
 #     imagestring= base64.b64encode(myImage.read())
 # # print(imagestring) 
 # # image.show()
+port = int(os.environ.get('PORT', 5000))
 if __name__ == "__main__":
-    app.run()
+    app.run(port=port)
