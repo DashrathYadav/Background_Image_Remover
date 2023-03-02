@@ -72,7 +72,7 @@ def  serv():
             shutil.rmtree(input_folder)
         os.makedirs(input_folder)
         print(os.getcwd())
-        
+
         output_folder = 'MODNet/demo/image_matting/colab/output'
         if os.path.exists(output_folder):
          shutil.rmtree(output_folder)
@@ -88,16 +88,16 @@ def  serv():
         # else :
         #     print("no path exist")
         subprocess.run([
-            'python', 
-            '-m', 
-            'MODNet.demo.image_matting.colab.inference',
-            '--input-path', 
-            'MODNet\demo\image_matting\colab\input',    
-            '--output-path', 
-            'MODNet\demo\image_matting\colab\output',
-            '--ckpt-path',
-            'MODNet\pretrained\modnet_photographic_portrait_matting.ckpt'
-        ])
+        'python', 
+        '-m', 
+        'MODNet.demo.image_matting.colab.inference',
+        '--input-path', 
+        'MODNet/demo/image_matting/colab/input',    
+        '--output-path', 
+        'MODNet/demo/image_matting/colab/output',
+        '--ckpt-path',
+        'MODNet/pretrained/modnet_photographic_portrait_matting.ckpt'
+    ])
 
 
         def combined_display(image, matte):
