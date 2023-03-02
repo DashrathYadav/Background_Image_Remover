@@ -61,6 +61,9 @@ def  serv():
 
         pretrained_ckpt = 'pretrained/modnet_photographic_portrait_matting.ckpt'
 
+        if os.path.exists('MODNet.demo/image_matting/colab/input'):
+        #     print("You have this path")
+        
         input_folder = 'MODNet/demo/image_matting/colab/input'
         if os.path.exists(input_folder):
             shutil.rmtree(input_folder)
