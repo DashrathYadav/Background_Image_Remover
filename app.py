@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template,Response
 import requests
 import base64
 import os
@@ -7,6 +7,7 @@ import shutil
 import numpy as np
 from PIL import Image
 import time
+import json
 
 app = Flask(__name__)
 
@@ -22,7 +23,7 @@ def upload():
         print(f)
         f.save('user_image.jpg')
         print('File saved')
-    
+    print("in upload")
     with open('user_image.jpg', 'rb') as myImage:
         imagestring = base64.b64encode(myImage.read())
 
@@ -30,6 +31,7 @@ def upload():
     # adrr='http://127.0.0.1:5000/'
     # adrr = adrr + 'serv'
     r = requests.post('https://back-ground-image-remove.onrender.com/serve', imagestring)
+    print("stage upload complete")
     print(r.json())
 
     time.sleep(5)
@@ -38,7 +40,7 @@ def upload():
 @app.route('/serv', methods=['POST'])
 def serv():
     client_data = request.data
-
+    print('server started')
     with open('server_image.jpg', 'wb+') as serv_img:
          serv_img.write(base64.b64decode(client_data))
 
@@ -88,8 +90,9 @@ def serv():
 
         foreground_img = Image.fromarray(np.uint8(foreground))
         foreground_img.save('static/foreground.jpg')
+        print('foreground saved')
 
-        return combined
+        # return combined
 
     image_names = os.listdir(input_folder)
     print(image_names)
@@ -99,11 +102,20 @@ def serv():
         image = Image.open(os.path.join(input_folder, image_name))
         matte = Image.open(os.path.join(output_folder, matte_name))
         combined_display(image, matte)
+    print("server done")
+    response = {
+        'status':'ok',
+        'message':'I am server'
+    }
+    return Response(response=json.dumps(response), status=200, mimetype='application/json').close()
 
-    return {
-            'status':'ok',
-            'message':' I am server'
-               }
+
+port = int(os.environ.get('PORT', 5000))
+app.config['SERVER_TIMEOUT'] = 60  # set timeout to 60 seconds
+
+if __name__ == "__main__":
+    app.run(port=port)
+
 
 port = int(os.environ.get('PORT', 5000))
 if __name__ == "__main__":
