@@ -46,6 +46,7 @@ def upload():
     print(r.json())
     time.sleep(5)
     return render_template('user_image_show.html')
+
     return "i am working"
 
 @app.route('/serv',methods=['POST'])
@@ -149,5 +150,5 @@ def  serv():
 #     imagestring= base64.b64encode(myImage.read())
 # # print(imagestring) 
 # # image.show()
-
-app.run()
+if __name__ == "__main__":
+    app.run()
