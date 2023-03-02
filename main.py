@@ -27,7 +27,8 @@ def upload():
         imagestring = base64.b64encode(myImage.read())
 
     adrr = 'https://back-ground-image-remove.onrender.com/'
-    adrr = adrr + 'serv'
+    adrr='http://127.0.0.1:5000/'
+    # adrr = adrr + 'serv'
     r = requests.post(adrr + 'serv', imagestring)
     print(r.json())
 
@@ -97,4 +98,13 @@ def serv():
         print(matte_name)
         image = Image.open(os.path.join(input_folder, image_name))
         matte = Image.open(os.path.join(output_folder, matte_name))
-        combined_display
+        combined_display(image, matte)
+
+    return {
+            'status':'ok',
+            'message':' I am server'
+               }
+
+port = int(os.environ.get('PORT', 5000))
+if __name__ == "__main__":
+    app.run(port=port)
