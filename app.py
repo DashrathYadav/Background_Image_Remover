@@ -9,7 +9,6 @@ import subprocess
 import shutil
 import numpy as np
 from PIL import Image
-from IPython.display import display
 import time
 # import files
 # subprocess.run(["git", "clone", "https://github.com/ZHKKKe/MODNet"])
@@ -131,7 +130,7 @@ def  serv():
             print(matte_name)
             image = Image.open(os.path.join(input_folder, image_name))
             matte = Image.open(os.path.join(output_folder, matte_name))
-            display(combined_display(image, matte))
+            (combined_display(image, matte))
             # print(image_name, '\n')
             
             
