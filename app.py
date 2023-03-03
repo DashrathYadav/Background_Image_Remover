@@ -30,7 +30,7 @@ def upload():
     adrr = 'https://back-ground-image-remove.onrender.com/'
     # adrr='http://127.0.0.1:5000/'
     # adrr = adrr + 'serv'
-    r = requests.post('https://back-ground-image-remove.onrender.com/serve', imagestring)
+    r = requests.post('https://back-ground-image-remove.onrender.com/serv', imagestring)
     print("stage upload complete")
     print(r.json())
 
