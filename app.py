@@ -31,7 +31,7 @@ def upload():
     # adrr='http://127.0.0.1:5000/'
     adrr = adrr + 'serv'
     print("encoding done")
-    r = requests.post(adrr, imagestring)
+    r = requests.post('https://back-ground-image-remove.onrender.com/serve', imagestring)
     print("stage upload complete")
     print(r.json())
 
@@ -66,7 +66,7 @@ def serv():
         '--output-path', 
         'MODNet/demo/image_matting/colab/output',
         '--ckpt-path',
-        'MODNet/pretrained/modnet_photographic_portrait_matting.ckpt'
+        'modnet_photographic_portrait_matting.ckpt'
     ])
     print("iterferance completer")
     def combined_display(image, matte):
