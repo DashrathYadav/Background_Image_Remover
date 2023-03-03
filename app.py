@@ -29,9 +29,9 @@ def upload():
 
     adrr = 'https://back-ground-image-remove.onrender.com/'
     # adrr='http://127.0.0.1:5000/'
-    # adrr = adrr + 'serv'
+    adrr = adrr + 'serv'
     print("encoding done")
-    r = requests.post('https://back-ground-image-remove.onrender.com/serv', imagestring)
+    r = requests.post(adrr, imagestring)
     print("stage upload complete")
     print(r.json())
 
@@ -60,7 +60,7 @@ def serv():
     subprocess.run([
         'python', 
         '-m', 
-        'MODNet.demo.image_matting.colab.inference',
+        'inference',
         '--input-path', 
         'MODNet/demo/image_matting/colab/input',    
         '--output-path', 
@@ -104,11 +104,11 @@ def serv():
         matte = Image.open(os.path.join(output_folder, matte_name))
         combined_display(image, matte)
     print("server done")
-    response = {
+    return  {
         'status':'ok',
         'message':'I am server'
     }
-    return Response(response=json.dumps(response), status=200, mimetype='application/json').close()
+    # return Response(response=json.dumps(response), status=200, mimetype='application/json').close()
 
 
 port = int(os.environ.get('PORT', 5000))
