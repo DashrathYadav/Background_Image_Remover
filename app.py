@@ -55,7 +55,7 @@ def serv():
     os.makedirs(output_folder)
 
     shutil.move('server_image.jpg', os.path.join(input_folder, 'server_image.jpg'))
-
+    print("image moved")
     subprocess.run([
         'python', 
         '-m', 
@@ -67,7 +67,7 @@ def serv():
         '--ckpt-path',
         'MODNet/pretrained/modnet_photographic_portrait_matting.ckpt'
     ])
-
+    print("iterferance completer")
     def combined_display(image, matte):
         # calculate display resolution
         w, h = image.width, image.height
@@ -112,9 +112,6 @@ def serv():
 
 port = int(os.environ.get('PORT', 5000))
 app.config['SERVER_TIMEOUT'] = 60  # set timeout to 60 seconds
-
-if __name__ == "__main__":
-    app.run(port=port)
 
 
 port = int(os.environ.get('PORT', 5000))
